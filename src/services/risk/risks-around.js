@@ -6,21 +6,19 @@ module.exports = function(request, response) {
     return response.send(400, 'Invalid params.');
   }
 
-  var latitute = request.params.latitude;
+  var radiusInKm = 1;
+  var kilometersPerDegree = 111.2;
   var longitude = request.params.longitude;
-  var maxDistance = 100;
+  var latitute = request.params.latitude;
 
   if (!isNumeric(latitute) || !isNumeric(longitude)) {
     return response.send(400, 'Invalid latitude or longitude.');
   }
 
-  var coords = [longitude, latitute];
-  console.log("coords: " + coords);
-
   Place.find({
     loc: {
-      $near: coords,
-      $maxDistance: maxDistance
+      $near: [longitude, latitute],
+      $maxDistance: radiusInKm / kilometersPerDegree
     }
   }).exec(function(err, places) {
     if (err) {
