@@ -9,8 +9,9 @@
   "scripts": {
     "pretest": "node ./tests/test_setup.js",
     "unit-test": "jasmine-node --verbose tests/unit",
-    "integration-test": "npm run pretest && NODE_ENV=test jasmine-node --verbose tests/integration",
-    "start": "NODE_ENV=app node index.js"
+    "integration-test": "NODE_ENV=test node ./tests/integration/run_tests.js",
+    "test": "npm run unit-test",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,8 @@
   "homepage": "https://github.com/VamosJuntas/back-end",
   "dependencies": {
     "is-numeric": "0.0.5",
+    "jsonschema": "^1.1.0",
+    "mockgoose": "^6.0.3",
     "mongodb": "^2.1.14",
     "mongoose": "^4.4.5",
     "restify": "^4.0.4"
